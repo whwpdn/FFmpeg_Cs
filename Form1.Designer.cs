@@ -48,17 +48,22 @@
             this.listHistory = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnListUp = new System.Windows.Forms.Button();
+            this.btnListDown = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listClips
             // 
+            this.listClips.AllowDrop = true;
             this.listClips.FormattingEnabled = true;
             this.listClips.ItemHeight = 12;
             this.listClips.Location = new System.Drawing.Point(11, 37);
             this.listClips.Name = "listClips";
             this.listClips.Size = new System.Drawing.Size(513, 88);
             this.listClips.TabIndex = 2;
+            this.listClips.DragDrop += new System.Windows.Forms.DragEventHandler(this.listClips_DragDrop);
+            this.listClips.DragEnter += new System.Windows.Forms.DragEventHandler(this.listClips_DragEnter);
             // 
             // tbOutputPath
             // 
@@ -104,7 +109,7 @@
             "MP4"});
             this.cbFormat.Location = new System.Drawing.Point(71, 174);
             this.cbFormat.Name = "cbFormat";
-            this.cbFormat.Size = new System.Drawing.Size(121, 20);
+            this.cbFormat.Size = new System.Drawing.Size(112, 20);
             this.cbFormat.TabIndex = 4;
             // 
             // label3
@@ -119,7 +124,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(205, 177);
+            this.label4.Location = new System.Drawing.Point(204, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 3;
@@ -131,9 +136,9 @@
             this.cbResolution.Items.AddRange(new object[] {
             "--Select--",
             "\'hd1080\' 1920x1080"});
-            this.cbResolution.Location = new System.Drawing.Point(264, 174);
+            this.cbResolution.Location = new System.Drawing.Point(255, 174);
             this.cbResolution.Name = "cbResolution";
-            this.cbResolution.Size = new System.Drawing.Size(121, 20);
+            this.cbResolution.Size = new System.Drawing.Size(152, 20);
             this.cbResolution.TabIndex = 4;
             // 
             // statusStrip1
@@ -149,7 +154,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(543, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(574, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "Ready";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -210,6 +215,8 @@
             // 
             // listHistory
             // 
+            this.listHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
@@ -231,11 +238,33 @@
             this.columnHeader2.Text = "Note";
             this.columnHeader2.Width = 132;
             // 
-            // Form1
+            // btnListUp
+            // 
+            this.btnListUp.Location = new System.Drawing.Point(531, 37);
+            this.btnListUp.Name = "btnListUp";
+            this.btnListUp.Size = new System.Drawing.Size(32, 23);
+            this.btnListUp.TabIndex = 8;
+            this.btnListUp.Text = "△";
+            this.btnListUp.UseVisualStyleBackColor = true;
+            this.btnListUp.Click += new System.EventHandler(this.btnListUp_Click);
+            // 
+            // btnListDown
+            // 
+            this.btnListDown.Location = new System.Drawing.Point(531, 67);
+            this.btnListDown.Name = "btnListDown";
+            this.btnListDown.Size = new System.Drawing.Size(32, 23);
+            this.btnListDown.TabIndex = 9;
+            this.btnListDown.Text = "▽";
+            this.btnListDown.UseVisualStyleBackColor = true;
+            this.btnListDown.Click += new System.EventHandler(this.btnListDown_Click);
+            // 
+            // ConcatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(691, 358);
+            this.Controls.Add(this.btnListDown);
+            this.Controls.Add(this.btnListUp);
             this.Controls.Add(this.listHistory);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.cbResolution);
@@ -252,7 +281,7 @@
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.tbOutputPath);
-            this.Name = "Form1";
+            this.Name = "ConcatForm";
             this.Text = "Form1";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -283,6 +312,8 @@
         private System.Windows.Forms.ListView listHistory;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Button btnListUp;
+        private System.Windows.Forms.Button btnListDown;
     }
 }
 

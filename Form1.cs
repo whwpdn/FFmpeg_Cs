@@ -248,5 +248,54 @@ namespace ffmpegTestApp
             this.toolStripProgressBar1.Value = 0;
             this.toolStripStatusLabel1.Text = "";
         }
+
+        private void btnListUp_Click(object sender, EventArgs e)
+        {
+            if(this.listClips.SelectedIndex >0)
+            {
+                SwapListItem(-1);   
+            }
+        }
+
+        private void btnListDown_Click(object sender, EventArgs e)
+        {
+            if(this.listClips.SelectedIndex < (this.listClips.Items.Count-1))
+            {
+                SwapListItem(1);
+            }
+        }
+        private void SwapListItem(int direction)
+        {
+            int itemIdx = this.listClips.SelectedIndex;
+            var item = this.listClips.Items[itemIdx];
+            this.listClips.Items.RemoveAt(itemIdx );
+            this.listClips.Items.Insert((itemIdx + direction), item);
+            this.listClips.SelectedIndex = itemIdx + direction;
+        }
+
+        private void listClips_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+            {
+                string ext =Path.GetExtension(file);
+                if(ext.Contains("mxf") || ext.Contains("mp4"))
+                {
+                    this.listClips.Items.Add(file);
+                }
+                else
+                {
+                    this.toolStripStatusLabel1.Text = "Can't add file(type error) - " + file;
+                }
+                
+
+            }
+        }
+
+        private void listClips_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
+            e.Effect = DragDropEffects.Copy;
+        }
     }
 }
